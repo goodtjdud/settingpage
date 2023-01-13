@@ -16,16 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const SettingPage(),
     );
@@ -51,48 +42,103 @@ class _SettingPageState extends State<SettingPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("설정")),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100,
-                child: Text("음성 안내",
-                  style: TextStyle(
-                      fontSize: 20),
-                ),),
-              IconButton(
-                icon: play,
-                iconSize:45,
-                padding: EdgeInsets.all(0.0),
-                splashRadius: 25.0,
-                onPressed: ()=> setState(() {
-                  if (musicStart == 0) {
-                    player.play(AssetSource('pretender.mp3'),);
-                    musicStart = 1;
-                    play = Icon(
-                      Icons.stop_circle,
-                    );
-                    print("music started");}
-                  else {
-                    player.stop();
-                    musicStart = 0;
-                    play = Icon(
-                      Icons.play_circle,
-                    );
-                    print("music stopped");}
-                },
-                ),),
-              SizedBox(
-                  height: 50,
-                  child: Text("앱 안내 듣기")),
-              SizedBox(
-                  height: 50,
-                  child: Text("SettingPage")),
+          child:
+            ListView(
+              children: [
+                  Card(
+                    color: Colors.lightGreen[100],
+                    elevation: 0,
+                    margin: const EdgeInsets.symmetric(vertical: 1),
+                    child: ListTile(
+                    contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
 
-            ],
-          ),
+                    title: SizedBox(
+                    child: Text(
+                      "음성 안내",
+                    style: TextStyle(
+                    fontSize:25),
+                    ),
+                    ),
+                      subtitle: SizedBox(
+                        child: Text("인식 결과를 음성으로 알려줍니다.",
+                        style: TextStyle(
+                          fontSize: 20),
+                        ),),
+                      trailing: Icon(Icons.fastfood,
+                      size: 50,)
+                      )
+                  ),
+                Card(
+                    color: Colors.lightGreen[100],
+                    elevation: 0,
+                    margin: const EdgeInsets.symmetric(vertical: 1),
+                    child: ListTile(
+                        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+
+                        title: SizedBox(
+                          child: Text(
+                            "앱 안내 듣기",
+                            style: TextStyle(
+                                fontSize:25),
+                          ),
+                        ),
+                        subtitle: SizedBox(
+                          child: Text("앱 사용 방법을 음성으로 들려줍니다.",
+
+                            style: TextStyle(
+                                fontSize: 20),
+                          ),),
+                        trailing: IconButton(
+                                icon: play,
+                                iconSize:50,
+                                padding: EdgeInsets.all(0.0),
+                                splashRadius: 25.0,
+                                onPressed: ()=> setState(() {
+                                  if (musicStart == 0) {
+                                    player.play(AssetSource('pretender.mp3'),);
+                                    musicStart = 1;
+                                    play = Icon(
+                                      Icons.stop_circle,
+                                    );
+                                    print("music started");}
+                                  else {
+                                    player.stop();
+                                    musicStart = 0;
+                                    play = Icon(
+                                      Icons.play_circle,
+                                    );
+                                    print("music stopped");}
+                                },
+                                ),)
+                    )
+                ),
+                Card(
+                    color: Colors.lightGreen[100],
+                    elevation: 0,
+                    margin: const EdgeInsets.symmetric(vertical: 1),
+                    child: ListTile(
+                        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+
+                        title: SizedBox(
+                          child: Text(
+                            "의견 제출",
+                            style: TextStyle(
+                                fontSize:25),
+                          ),
+                        ),
+                        subtitle: SizedBox(
+                          child: Text("앱 사용에 문의사항이 있으면 ...",
+                            style: TextStyle(
+                                fontSize: 20),
+                          ),)
+                    )
+                ),
+            ]
+            ),
         ),
       ),
     );
