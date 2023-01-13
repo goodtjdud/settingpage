@@ -36,6 +36,8 @@ Icon play = Icon(Icons.play_circle,
   color: Colors.black,
   size: 40,);
 final player = AudioPlayer();
+var isSwitched = false;
+TextEditingController editingController = TextEditingController();
 
 class _SettingPageState extends State<SettingPage> {
   @override
@@ -64,12 +66,27 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     ),
                       subtitle: SizedBox(
-                        child: Text("인식 결과를 음성으로 알려줍니다.",
+                        child: Text("인식 결과를 터치 없이 음성으로\n들을 수 있습니다.",
                         style: TextStyle(
                           fontSize: 20),
                         ),),
-                      trailing: Icon(Icons.fastfood,
-                      size: 50,)
+                      trailing: SizedBox(
+                        width: 70,
+                        height: 80,
+                        child: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Switch(
+                            value: isSwitched,
+                            onChanged: (value) {
+                              setState(() {
+                                isSwitched = value;
+                              });
+                            },
+                            activeColor: Colors.green,
+                          ),
+                        ),
+                      ),
+
                       )
                   ),
                 Card(
@@ -87,7 +104,7 @@ class _SettingPageState extends State<SettingPage> {
                           ),
                         ),
                         subtitle: SizedBox(
-                          child: Text("앱 사용 방법을 음성으로 들려줍니다.",
+                          child: Text("앱 사용 방법을 음성으로\n들을 수 있습니다.",
 
                             style: TextStyle(
                                 fontSize: 20),
@@ -131,13 +148,17 @@ class _SettingPageState extends State<SettingPage> {
                           ),
                         ),
                         subtitle: SizedBox(
-                          child: Text("앱 사용에 문의사항이 있으면 ...",
-                            style: TextStyle(
-                                fontSize: 20),
-                          ),)
+                          child: TextField(
+                            controller: editingController,
+                            decoration: InputDecoration(
+                                hintText: "의견 사항이 있으시다면 ...",
+                                border: OutlineInputBorder(),
+                            )
+                          ),
+                        )
                     )
                 ),
-            ]
+              ]
             ),
         ),
       ),
