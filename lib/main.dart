@@ -44,6 +44,7 @@ class _SettingPageState extends State<SettingPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.lightGreen[100],
       appBar: AppBar(title: const Text("설정")),
       body: SafeArea(
         child: Builder(
